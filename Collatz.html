@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conjetura de Collatz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        input, button {
+            font-size: 16px;
+            padding: 10px;
+            margin: 10px;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Conjetura de Collatz</h1>
+    <p>Ingresa un número y mira su secuencia:</p>
+    
+    <input type="number" id="numberInput" placeholder="Escribe un número">
+    <button onclick="calcularCollatz()">Calcular</button>
+
+    <div id="result"></div>
+
+    <script>
+        function collatzSequence(n) {
+            let sequence = [n];
+            while (n !== 1) {
+                if (n % 2 === 0) {
+                    n = n / 2;
+                } else {
+                    n = 3 * n + 1;
+                }
+                sequence.push(n);
+            }
+            return sequence;
+        }
+
+        function calcularCollatz() {
+            let input = document.getElementById("numberInput").value;
+            let n = parseInt(input);
+            
+            if (isNaN(n) || n <= 0) {
+                document.getElementById("result").innerHTML = "<strong>Por favor, ingresa un número válido mayor que 0.</strong>";
+                return;
+            }
+
+            let sequence = collatzSequence(n);
+            document.getElementById("result").innerHTML = "<strong>Secuencia:</strong> " + sequence.join(" → ");
+        }
+    </script>
+
+</body>
+</html>
+
+<footer>
+  <p>Creado por <strong> Miguel Vázquez </strong></p>
+</footer>
